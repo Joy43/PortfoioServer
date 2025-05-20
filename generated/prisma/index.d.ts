@@ -4212,7 +4212,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language: string | null
     categoryId: string
     userId: string
     createdAt: Date
@@ -4331,7 +4331,7 @@ export namespace Prisma {
       description: string
       location: string
       image: string
-      language: string
+      language: string | null
       categoryId: string
       userId: string
       createdAt: Date
@@ -9617,6 +9617,7 @@ export namespace Prisma {
     description: string | null
     image: string | null
     categoryId: string | null
+    languages: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -9628,6 +9629,7 @@ export namespace Prisma {
     description: string | null
     image: string | null
     categoryId: string | null
+    languages: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -9639,6 +9641,7 @@ export namespace Prisma {
     description: number
     image: number
     categoryId: number
+    languages: number
     userId: number
     createdAt: number
     updatedAt: number
@@ -9652,6 +9655,7 @@ export namespace Prisma {
     description?: true
     image?: true
     categoryId?: true
+    languages?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -9663,6 +9667,7 @@ export namespace Prisma {
     description?: true
     image?: true
     categoryId?: true
+    languages?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -9674,6 +9679,7 @@ export namespace Prisma {
     description?: true
     image?: true
     categoryId?: true
+    languages?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -9758,6 +9764,7 @@ export namespace Prisma {
     description: string
     image: string
     categoryId: string
+    languages: string
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -9786,6 +9793,7 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     categoryId?: boolean
+    languages?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9799,6 +9807,7 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     categoryId?: boolean
+    languages?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9812,6 +9821,7 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     categoryId?: boolean
+    languages?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9825,12 +9835,13 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     categoryId?: boolean
+    languages?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "image" | "categoryId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "image" | "categoryId" | "languages" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | ProjectCategoryDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -9856,6 +9867,7 @@ export namespace Prisma {
       description: string
       image: string
       categoryId: string
+      languages: string
       userId: string
       createdAt: Date
       updatedAt: Date
@@ -10289,6 +10301,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Project", 'String'>
     readonly image: FieldRef<"Project", 'String'>
     readonly categoryId: FieldRef<"Project", 'String'>
+    readonly languages: FieldRef<"Project", 'String'>
     readonly userId: FieldRef<"Project", 'String'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
     readonly updatedAt: FieldRef<"Project", 'DateTime'>
@@ -10816,6 +10829,7 @@ export namespace Prisma {
     description: 'description',
     image: 'image',
     categoryId: 'categoryId',
+    languages: 'languages',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -11117,7 +11131,7 @@ export namespace Prisma {
     description?: StringFilter<"Post"> | string
     location?: StringFilter<"Post"> | string
     image?: StringFilter<"Post"> | string
-    language?: StringFilter<"Post"> | string
+    language?: StringNullableFilter<"Post"> | string | null
     categoryId?: StringFilter<"Post"> | string
     userId?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
@@ -11135,7 +11149,7 @@ export namespace Prisma {
     description?: SortOrder
     location?: SortOrder
     image?: SortOrder
-    language?: SortOrder
+    language?: SortOrderInput | SortOrder
     categoryId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -11156,7 +11170,7 @@ export namespace Prisma {
     description?: StringFilter<"Post"> | string
     location?: StringFilter<"Post"> | string
     image?: StringFilter<"Post"> | string
-    language?: StringFilter<"Post"> | string
+    language?: StringNullableFilter<"Post"> | string | null
     categoryId?: StringFilter<"Post"> | string
     userId?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
@@ -11174,7 +11188,7 @@ export namespace Prisma {
     description?: SortOrder
     location?: SortOrder
     image?: SortOrder
-    language?: SortOrder
+    language?: SortOrderInput | SortOrder
     categoryId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -11193,7 +11207,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Post"> | string
     location?: StringWithAggregatesFilter<"Post"> | string
     image?: StringWithAggregatesFilter<"Post"> | string
-    language?: StringWithAggregatesFilter<"Post"> | string
+    language?: StringNullableWithAggregatesFilter<"Post"> | string | null
     categoryId?: StringWithAggregatesFilter<"Post"> | string
     userId?: StringWithAggregatesFilter<"Post"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
@@ -11455,6 +11469,7 @@ export namespace Prisma {
     description?: StringFilter<"Project"> | string
     image?: StringFilter<"Project"> | string
     categoryId?: StringFilter<"Project"> | string
+    languages?: StringFilter<"Project"> | string
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -11468,6 +11483,7 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     categoryId?: SortOrder
+    languages?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11484,6 +11500,7 @@ export namespace Prisma {
     description?: StringFilter<"Project"> | string
     image?: StringFilter<"Project"> | string
     categoryId?: StringFilter<"Project"> | string
+    languages?: StringFilter<"Project"> | string
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -11497,6 +11514,7 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     categoryId?: SortOrder
+    languages?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11514,6 +11532,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Project"> | string
     image?: StringWithAggregatesFilter<"Project"> | string
     categoryId?: StringWithAggregatesFilter<"Project"> | string
+    languages?: StringWithAggregatesFilter<"Project"> | string
     userId?: StringWithAggregatesFilter<"Project"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
@@ -11696,7 +11715,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutPostsInput
@@ -11712,7 +11731,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     categoryId: string
     userId: string
     createdAt?: Date | string
@@ -11728,7 +11747,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
@@ -11744,7 +11763,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11760,7 +11779,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     categoryId: string
     userId: string
     createdAt?: Date | string
@@ -11773,7 +11792,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11784,7 +11803,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12039,6 +12058,7 @@ export namespace Prisma {
     title: string
     description: string
     image: string
+    languages: string
     createdAt?: Date | string
     updatedAt?: Date | string
     category: ProjectCategoryCreateNestedOneWithoutProjectInput
@@ -12051,6 +12071,7 @@ export namespace Prisma {
     description: string
     image: string
     categoryId: string
+    languages: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12061,6 +12082,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProjectCategoryUpdateOneRequiredWithoutProjectNestedInput
@@ -12073,6 +12095,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12084,6 +12107,7 @@ export namespace Prisma {
     description: string
     image: string
     categoryId: string
+    languages: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12094,6 +12118,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12104,6 +12129,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12612,6 +12638,7 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     categoryId?: SortOrder
+    languages?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12623,6 +12650,7 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     categoryId?: SortOrder
+    languages?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12634,6 +12662,7 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     categoryId?: SortOrder
+    languages?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13470,7 +13499,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutPostsInput
@@ -13485,7 +13514,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     categoryId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13509,6 +13538,7 @@ export namespace Prisma {
     title: string
     description: string
     image: string
+    languages: string
     createdAt?: Date | string
     updatedAt?: Date | string
     category: ProjectCategoryCreateNestedOneWithoutProjectInput
@@ -13520,6 +13550,7 @@ export namespace Prisma {
     description: string
     image: string
     categoryId: string
+    languages: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13637,7 +13668,7 @@ export namespace Prisma {
     description?: StringFilter<"Post"> | string
     location?: StringFilter<"Post"> | string
     image?: StringFilter<"Post"> | string
-    language?: StringFilter<"Post"> | string
+    language?: StringNullableFilter<"Post"> | string | null
     categoryId?: StringFilter<"Post"> | string
     userId?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
@@ -13669,6 +13700,7 @@ export namespace Prisma {
     description?: StringFilter<"Project"> | string
     image?: StringFilter<"Project"> | string
     categoryId?: StringFilter<"Project"> | string
+    languages?: StringFilter<"Project"> | string
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -13764,7 +13796,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPostsInput
@@ -13779,7 +13811,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14117,7 +14149,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutPostsInput
@@ -14132,7 +14164,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     categoryId: string
     userId: string
     createdAt?: Date | string
@@ -14208,7 +14240,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
@@ -14223,7 +14255,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14277,7 +14309,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutPostsInput
@@ -14292,7 +14324,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     categoryId: string
     userId: string
     createdAt?: Date | string
@@ -14368,7 +14400,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
@@ -14383,7 +14415,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14437,7 +14469,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutPostsInput
@@ -14452,7 +14484,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     categoryId: string
     userId: string
     createdAt?: Date | string
@@ -14528,7 +14560,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
@@ -14543,7 +14575,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14557,6 +14589,7 @@ export namespace Prisma {
     title: string
     description: string
     image: string
+    languages: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutProjectInput
@@ -14567,6 +14600,7 @@ export namespace Prisma {
     title: string
     description: string
     image: string
+    languages: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14736,7 +14770,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     categoryId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14748,6 +14782,7 @@ export namespace Prisma {
     description: string
     image: string
     categoryId: string
+    languages: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14782,7 +14817,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
@@ -14797,7 +14832,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14812,7 +14847,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14823,6 +14858,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProjectCategoryUpdateOneRequiredWithoutProjectNestedInput
@@ -14834,6 +14870,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14844,6 +14881,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14926,7 +14964,7 @@ export namespace Prisma {
     description: string
     location: string
     image: string
-    language: string
+    language?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14938,7 +14976,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -14953,7 +14991,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14968,7 +15006,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    language?: StringFieldUpdateOperationsInput | string
+    language?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15075,6 +15113,7 @@ export namespace Prisma {
     title: string
     description: string
     image: string
+    languages: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15085,6 +15124,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProjectNestedInput
@@ -15095,6 +15135,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15105,6 +15146,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    languages?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

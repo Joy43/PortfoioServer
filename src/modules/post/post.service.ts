@@ -1,5 +1,5 @@
 import { JwtPayload } from "jsonwebtoken";
-import { Post, PostStatus, Prisma, UserRole } from "../../../generated/prisma";
+import { Post,  Prisma, UserRole } from "../../../generated/prisma";
 import config from "../../config";
 import { jwtHelper } from "../../utils/jwtHelper";
 import prisma from "../../utils/prismaProvider";
@@ -157,7 +157,7 @@ const getSinglePost = async (id: string) => {
   const result = await prisma.post.findUnique({
     where: {
       id,
-      status: PostStatus.APPROVED,
+     
     },
     include: {
       category: true,

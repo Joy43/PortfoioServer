@@ -65,7 +65,7 @@ model Post {
   description String
   location    String
   image       String
-  language    String
+  language    String?
   categoryId  String
   category    Category   @relation(fields: [categoryId], references: [id])
   userId      String
@@ -131,6 +131,7 @@ model Project {
   description String
   image       String
   categoryId  String
+  languages   String
   category    ProjectCategory @relation(fields: [categoryId], references: [id])
   userId      String
   user        User            @relation(fields: [userId], references: [id])

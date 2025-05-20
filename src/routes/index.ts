@@ -1,10 +1,14 @@
 import { Router } from "express";
 import { authRoute } from "../modules/auth/auth.route";
+import { Projectrouter } from "../modules/project/project.routes";
+import { projectcategoryRoute } from "../modules/projectCategory/project.category.routes";
 
 
 const route = Router();
 const modules = [
   { path: "/auth", route: authRoute},
+  {path:"/project",route:Projectrouter},
+  {path:"/project-category",route:projectcategoryRoute}
 ];
 
 modules.forEach((module) => {
