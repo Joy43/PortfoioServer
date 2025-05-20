@@ -1,8 +1,7 @@
 import { JwtPayload } from "jsonwebtoken";
 import { User, UserStatus } from "../../../generated/prisma";
-import { jwtHelper } from "../../utils/jwtHelper";
 import prisma from "../../utils/prismaProvider";
-import config from "../../config";
+
 
 const getAllUser = async (paginateQuery: Record<string, unknown>) => {
   const { page = 1, limit = 10 } = paginateQuery;

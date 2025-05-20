@@ -1,9 +1,11 @@
 import { v2 as cloudinary } from "cloudinary";
 import config from "../config";
-import { IFile } from "../types/file.type";
+
 import fs from "fs";
-import AppError from "../errors/AppError";
+
 import status from "http-status";
+import AppError from "../errors/AppError";
+import { IFile } from "../types/file.type";
 cloudinary.config({
   cloud_name: config.cloudnary_cloud_name,
   api_key: config.cloudnary_api_key,

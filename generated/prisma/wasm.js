@@ -128,7 +128,6 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   status: 'status',
   isDeleted: 'isDeleted',
-  isPremium: 'isPremium',
   premiumUntil: 'premiumUntil',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -148,11 +147,7 @@ exports.Prisma.PostScalarFieldEnum = {
   description: 'description',
   location: 'location',
   image: 'image',
-  price: 'price',
-  priceRange: 'priceRange',
-  isPremium: 'isPremium',
-  status: 'status',
-  reasons: 'reasons',
+  language: 'language',
   categoryId: 'categoryId',
   userId: 'userId',
   createdAt: 'createdAt',
@@ -198,13 +193,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  location: 'location',
   image: 'image',
-  price: 'price',
-  priceRange: 'priceRange',
-  isPremium: 'isPremium',
-  status: 'status',
-  reasons: 'reasons',
   categoryId: 'categoryId',
   userId: 'userId',
   createdAt: 'createdAt',
@@ -235,12 +224,6 @@ exports.UserStatus = exports.$Enums.UserStatus = {
   ACTIVE: 'ACTIVE',
   BLOCKED: 'BLOCKED',
   DELETED: 'DELETED'
-};
-
-exports.PostStatus = exports.$Enums.PostStatus = {
-  PENDING: 'PENDING',
-  APPROVED: 'APPROVED',
-  REJECTED: 'REJECTED'
 };
 
 exports.VoteStatus = exports.$Enums.VoteStatus = {

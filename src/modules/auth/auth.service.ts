@@ -1,13 +1,14 @@
 import status from "http-status";
 import { User, UserStatus } from "../../../generated/prisma";
-import AppError from "../../errors/AppError";
+
 import prisma from "../../utils/prismaProvider";
 import { bcryptHelper } from "../../utils/bcryptHelper";
 import { jwtHelper } from "../../utils/jwtHelper";
 import config from "../../config";
 import sendEmail from "../../utils/sendEmail";
 import { JwtPayload } from "jsonwebtoken";
-
+import AppError from "../../errors/AppError";
+// ---------- 
 const loginUser = async (payload: Partial<User>) => {
   const isUserExist = await prisma.user.findUnique({
     where: { email: payload?.email },
@@ -44,6 +45,7 @@ const loginUser = async (payload: Partial<User>) => {
     refreshToken,
   };
 };
+// ------------------------ register user------------
 const registerNewUser = async (payload: User) => {
   const isUserExist = await prisma.user.findUnique({
     where: { email: payload?.email },
@@ -78,6 +80,7 @@ const registerNewUser = async (payload: User) => {
   };
 };
 
+// -----------
 const changePasswordWithOldPassword = async (payload: {
   oldPassword: string;
   newPassword: string;

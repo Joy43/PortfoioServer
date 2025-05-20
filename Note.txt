@@ -14,3 +14,9 @@ npx prisma format
 npx prisma validate
 ---------------packeage install------------
 yarn add -D @types/bcrypt @types/cors @types/express @types/formidable @types/jsonwebtoken @types/multer @types/node @types/nodemailer
+
+yarn add --dev @types/nodemailer
+yarn add nodemailer
+
+yarn add jsonwebtoken
+yarn add --dev @types/jsonwebtoken

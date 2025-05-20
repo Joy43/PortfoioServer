@@ -1,7 +1,8 @@
 import nodemailer from "nodemailer";
 import config from "../config";
-import AppError from "../errors/AppError";
+
 import status from "http-status";
+import AppError from "../errors/AppError";
 
 const sendEmail = async (email: string, resetLink: string) => {
   const transporter = nodemailer.createTransport({

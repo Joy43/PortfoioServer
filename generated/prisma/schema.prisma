@@ -32,12 +32,6 @@ enum UserRole {
   ADMIN
 }
 
-enum PostStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
 model User {
   id           String     @id @default(uuid())
   fullName     String?
@@ -67,20 +61,16 @@ model Category {
 }
 
 model Post {
-  id          String     @id @default(uuid())
+  id          String    @id @default(uuid())
   title       String
   description String
   location    String
   image       String
-  price       Float      @default(100)
-  priceRange  String
-  isPremium   Boolean    @default(false)
-  status      PostStatus @default(PENDING)
-  reasons     String?
+  language    String
   categoryId  String
-  category    Category   @relation(fields: [categoryId], references: [id])
+  category    Category  @relation(fields: [categoryId], references: [id])
   userId      String
-  user        User       @relation(fields: [userId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
   comments    Comment[]
   ratings     Rating[]
   votes       Vote[]
@@ -140,13 +130,7 @@ model Project {
   id          String          @id @default(uuid())
   title       String
   description String
-  location    String
   image       String
-  price       Float           @default(100)
-  priceRange  String
-  isPremium   Boolean         @default(false)
-  status      PostStatus      @default(PENDING)
-  reasons     String?
   categoryId  String
   category    ProjectCategory @relation(fields: [categoryId], references: [id])
   userId      String

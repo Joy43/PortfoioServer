@@ -16,5 +16,8 @@ export default {
     sender: process.env.SENDER_EMAIL,
     pass: process.env.SENDER_APP_PASS,
   },
+    reset_secret_key: process.env.RESET_SECRET_KEY,
+  reset_expires_in: process.env.RESET_EXPIRES_IN,
+  website_url: process.env.WEBSITE_URL,
 
 };

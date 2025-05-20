@@ -2,8 +2,9 @@ import { Router } from "express";
 import { authControllers } from "./auth.controller";
 import validateRequest from "../../utils/validateRequest";
 import { authValidation } from "./auth.validation";
-import auth from "../../middlewares/auth";
+
 import { UserRole } from "../../../generated/prisma";
+import auth from "../../middleware/auth";
 
 const route = Router();
 
