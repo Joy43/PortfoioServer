@@ -2,10 +2,21 @@ import { Project, UserRole } from '../../../generated/prisma/index';
 import prisma from '../../utils/prismaProvider';
 
 const createProject=async(payload:Project)=>{
-
     const result = await prisma.project.create({
-    data: payload,
-  });
+  data: {
+    title: payload.title,
+    description: payload.description,
+    languages: payload.languages,
+    image: payload.image,
+    category: {
+      connect: { id: payload.categoryId }
+    },
+    user: {
+      connect: { id: payload.userId }
+    }
+  }
+});
+
   return result;
 
 };
@@ -53,7 +64,7 @@ const getAllproject = async (paginateQuery: Record<string, unknown>) => {
     });
     return result;
   
-  }
+  };
 export const projectService={
     createProject,
     getAllproject,
