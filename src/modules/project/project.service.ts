@@ -1,4 +1,6 @@
+import status from 'http-status';
 import { Project, UserRole } from '../../../generated/prisma/index';
+import AppError from '../../errors/AppError';
 import prisma from '../../utils/prismaProvider';
 
 const createProject=async(payload:Project)=>{
@@ -8,6 +10,10 @@ const createProject=async(payload:Project)=>{
     description: payload.description,
     languages: payload.languages,
     image: payload.image,
+    githublink: payload.githublink,
+    gitclient: payload.gitclient,
+    gitserver: payload.gitserver,
+    livelink: payload.livelink, 
     category: {
       connect: { id: payload.categoryId }
     },
@@ -65,10 +71,28 @@ const getAllproject = async (paginateQuery: Record<string, unknown>) => {
     return result;
   
   };
+
+  const getSingleProject = async (id: string) => {
+  const result = await prisma.project.findUnique({
+    where: {
+      id,
+    
+    },
+    include: {
+      category: true,
+      user: true,
+    },
+  });
+  if (!result) {
+    throw new AppError(status.NOT_FOUND, "PoJECT not found");
+  }
+  return result;
+};
 export const projectService={
     createProject,
     getAllproject,
     Updateproject,
-    DeleteProject
+    DeleteProject,
+    getSingleProject
 
 }

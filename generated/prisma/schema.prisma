@@ -132,6 +132,10 @@ model Project {
   image       String
   categoryId  String
   languages   String
+  livelink    String
+  githublink  String
+  gitclient   String?
+  gitserver   String?
   category    ProjectCategory @relation(fields: [categoryId], references: [id])
   userId      String
   user        User            @relation(fields: [userId], references: [id])

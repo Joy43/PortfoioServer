@@ -196,6 +196,10 @@ exports.Prisma.ProjectScalarFieldEnum = {
   image: 'image',
   categoryId: 'categoryId',
   languages: 'languages',
+  livelink: 'livelink',
+  githublink: 'githublink',
+  gitclient: 'gitclient',
+  gitserver: 'gitserver',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

@@ -9618,6 +9618,10 @@ export namespace Prisma {
     image: string | null
     categoryId: string | null
     languages: string | null
+    livelink: string | null
+    githublink: string | null
+    gitclient: string | null
+    gitserver: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -9630,6 +9634,10 @@ export namespace Prisma {
     image: string | null
     categoryId: string | null
     languages: string | null
+    livelink: string | null
+    githublink: string | null
+    gitclient: string | null
+    gitserver: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -9642,6 +9650,10 @@ export namespace Prisma {
     image: number
     categoryId: number
     languages: number
+    livelink: number
+    githublink: number
+    gitclient: number
+    gitserver: number
     userId: number
     createdAt: number
     updatedAt: number
@@ -9656,6 +9668,10 @@ export namespace Prisma {
     image?: true
     categoryId?: true
     languages?: true
+    livelink?: true
+    githublink?: true
+    gitclient?: true
+    gitserver?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -9668,6 +9684,10 @@ export namespace Prisma {
     image?: true
     categoryId?: true
     languages?: true
+    livelink?: true
+    githublink?: true
+    gitclient?: true
+    gitserver?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -9680,6 +9700,10 @@ export namespace Prisma {
     image?: true
     categoryId?: true
     languages?: true
+    livelink?: true
+    githublink?: true
+    gitclient?: true
+    gitserver?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -9765,6 +9789,10 @@ export namespace Prisma {
     image: string
     categoryId: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient: string | null
+    gitserver: string | null
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -9794,6 +9822,10 @@ export namespace Prisma {
     image?: boolean
     categoryId?: boolean
     languages?: boolean
+    livelink?: boolean
+    githublink?: boolean
+    gitclient?: boolean
+    gitserver?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9808,6 +9840,10 @@ export namespace Prisma {
     image?: boolean
     categoryId?: boolean
     languages?: boolean
+    livelink?: boolean
+    githublink?: boolean
+    gitclient?: boolean
+    gitserver?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9822,6 +9858,10 @@ export namespace Prisma {
     image?: boolean
     categoryId?: boolean
     languages?: boolean
+    livelink?: boolean
+    githublink?: boolean
+    gitclient?: boolean
+    gitserver?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -9836,12 +9876,16 @@ export namespace Prisma {
     image?: boolean
     categoryId?: boolean
     languages?: boolean
+    livelink?: boolean
+    githublink?: boolean
+    gitclient?: boolean
+    gitserver?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "image" | "categoryId" | "languages" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "image" | "categoryId" | "languages" | "livelink" | "githublink" | "gitclient" | "gitserver" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | ProjectCategoryDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -9868,6 +9912,10 @@ export namespace Prisma {
       image: string
       categoryId: string
       languages: string
+      livelink: string
+      githublink: string
+      gitclient: string | null
+      gitserver: string | null
       userId: string
       createdAt: Date
       updatedAt: Date
@@ -10302,6 +10350,10 @@ export namespace Prisma {
     readonly image: FieldRef<"Project", 'String'>
     readonly categoryId: FieldRef<"Project", 'String'>
     readonly languages: FieldRef<"Project", 'String'>
+    readonly livelink: FieldRef<"Project", 'String'>
+    readonly githublink: FieldRef<"Project", 'String'>
+    readonly gitclient: FieldRef<"Project", 'String'>
+    readonly gitserver: FieldRef<"Project", 'String'>
     readonly userId: FieldRef<"Project", 'String'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
     readonly updatedAt: FieldRef<"Project", 'DateTime'>
@@ -10830,6 +10882,10 @@ export namespace Prisma {
     image: 'image',
     categoryId: 'categoryId',
     languages: 'languages',
+    livelink: 'livelink',
+    githublink: 'githublink',
+    gitclient: 'gitclient',
+    gitserver: 'gitserver',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -11470,6 +11526,10 @@ export namespace Prisma {
     image?: StringFilter<"Project"> | string
     categoryId?: StringFilter<"Project"> | string
     languages?: StringFilter<"Project"> | string
+    livelink?: StringFilter<"Project"> | string
+    githublink?: StringFilter<"Project"> | string
+    gitclient?: StringNullableFilter<"Project"> | string | null
+    gitserver?: StringNullableFilter<"Project"> | string | null
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -11484,6 +11544,10 @@ export namespace Prisma {
     image?: SortOrder
     categoryId?: SortOrder
     languages?: SortOrder
+    livelink?: SortOrder
+    githublink?: SortOrder
+    gitclient?: SortOrderInput | SortOrder
+    gitserver?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11501,6 +11565,10 @@ export namespace Prisma {
     image?: StringFilter<"Project"> | string
     categoryId?: StringFilter<"Project"> | string
     languages?: StringFilter<"Project"> | string
+    livelink?: StringFilter<"Project"> | string
+    githublink?: StringFilter<"Project"> | string
+    gitclient?: StringNullableFilter<"Project"> | string | null
+    gitserver?: StringNullableFilter<"Project"> | string | null
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -11515,6 +11583,10 @@ export namespace Prisma {
     image?: SortOrder
     categoryId?: SortOrder
     languages?: SortOrder
+    livelink?: SortOrder
+    githublink?: SortOrder
+    gitclient?: SortOrderInput | SortOrder
+    gitserver?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11533,6 +11605,10 @@ export namespace Prisma {
     image?: StringWithAggregatesFilter<"Project"> | string
     categoryId?: StringWithAggregatesFilter<"Project"> | string
     languages?: StringWithAggregatesFilter<"Project"> | string
+    livelink?: StringWithAggregatesFilter<"Project"> | string
+    githublink?: StringWithAggregatesFilter<"Project"> | string
+    gitclient?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    gitserver?: StringNullableWithAggregatesFilter<"Project"> | string | null
     userId?: StringWithAggregatesFilter<"Project"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
@@ -12059,6 +12135,10 @@ export namespace Prisma {
     description: string
     image: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category: ProjectCategoryCreateNestedOneWithoutProjectInput
@@ -12072,6 +12152,10 @@ export namespace Prisma {
     image: string
     categoryId: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12083,6 +12167,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProjectCategoryUpdateOneRequiredWithoutProjectNestedInput
@@ -12096,6 +12184,10 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12108,6 +12200,10 @@ export namespace Prisma {
     image: string
     categoryId: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12119,6 +12215,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12130,6 +12230,10 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12639,6 +12743,10 @@ export namespace Prisma {
     image?: SortOrder
     categoryId?: SortOrder
     languages?: SortOrder
+    livelink?: SortOrder
+    githublink?: SortOrder
+    gitclient?: SortOrder
+    gitserver?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12651,6 +12759,10 @@ export namespace Prisma {
     image?: SortOrder
     categoryId?: SortOrder
     languages?: SortOrder
+    livelink?: SortOrder
+    githublink?: SortOrder
+    gitclient?: SortOrder
+    gitserver?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12663,6 +12775,10 @@ export namespace Prisma {
     image?: SortOrder
     categoryId?: SortOrder
     languages?: SortOrder
+    livelink?: SortOrder
+    githublink?: SortOrder
+    gitclient?: SortOrder
+    gitserver?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13539,6 +13655,10 @@ export namespace Prisma {
     description: string
     image: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category: ProjectCategoryCreateNestedOneWithoutProjectInput
@@ -13551,6 +13671,10 @@ export namespace Prisma {
     image: string
     categoryId: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13701,6 +13825,10 @@ export namespace Prisma {
     image?: StringFilter<"Project"> | string
     categoryId?: StringFilter<"Project"> | string
     languages?: StringFilter<"Project"> | string
+    livelink?: StringFilter<"Project"> | string
+    githublink?: StringFilter<"Project"> | string
+    gitclient?: StringNullableFilter<"Project"> | string | null
+    gitserver?: StringNullableFilter<"Project"> | string | null
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -14590,6 +14718,10 @@ export namespace Prisma {
     description: string
     image: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutProjectInput
@@ -14601,6 +14733,10 @@ export namespace Prisma {
     description: string
     image: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14783,6 +14919,10 @@ export namespace Prisma {
     image: string
     categoryId: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14859,6 +14999,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProjectCategoryUpdateOneRequiredWithoutProjectNestedInput
@@ -14871,6 +15015,10 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14882,6 +15030,10 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15114,6 +15266,10 @@ export namespace Prisma {
     description: string
     image: string
     languages: string
+    livelink: string
+    githublink: string
+    gitclient?: string | null
+    gitserver?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15125,6 +15281,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProjectNestedInput
@@ -15136,6 +15296,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15147,6 +15311,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     languages?: StringFieldUpdateOperationsInput | string
+    livelink?: StringFieldUpdateOperationsInput | string
+    githublink?: StringFieldUpdateOperationsInput | string
+    gitclient?: NullableStringFieldUpdateOperationsInput | string | null
+    gitserver?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

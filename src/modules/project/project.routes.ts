@@ -7,6 +7,7 @@ const router=express.Router();
 
 router.post('/',projectController.createProject);
 router.get('/',projectController.getAllProject);
+router.get("/projectId",projectController.getSingleProject)
 router.put('/:projectId',projectController.UpdateProject);
 router.delete('/:projectId',projectController.DeleteProject);
 export const Projectrouter=router;

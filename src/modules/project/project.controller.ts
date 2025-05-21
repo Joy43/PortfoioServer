@@ -4,6 +4,7 @@ import sendResponse from "../../utils/sendResponse";
 import { projectService } from "./project.service";
 import status from "http-status";
 import pick from "../../utils/pick";
+import { postServices } from "../post/post.service";
 
 const createProject = catchAsync(async (req:Request, res:Response, next) => {
 
@@ -85,11 +86,22 @@ const DeleteProject=async(req:Request,res:Response)=>{
                 message: 'project delete successfully',
                 data: result
               });
-} 
+};
+const getSingleProject = catchAsync(async (req, res) => {
+  const { projectId } = req.params;
+  const result = await projectService.getSingleProject(projectId);
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "Project retrived successfully",
+    data: result,
+  });
+});
 
 export const projectController={
     createProject,
     getAllProject,
     UpdateProject,
-    DeleteProject
+    DeleteProject,
+    getSingleProject
 }
