@@ -1,9 +1,10 @@
 
-import { Post,  Prisma, UserRole } from "../../../generated/prisma";
 
-import prisma from "../../utils/prismaProvider";
+
+import prisma from "../../utils/prisma";
 import AppError from "../../errors/AppError";
 import status from "http-status";
+import { Post } from "@prisma/client";
 // -------------create post--------------
 const createPost = async (payload: Post) => {
   console.log("Upload", { payload });

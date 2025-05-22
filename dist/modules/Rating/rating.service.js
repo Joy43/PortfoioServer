@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RatingService = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const AppError_1 = __importDefault(require("../../errors/AppError"));
-const prismaProvider_1 = __importDefault(require("../../utils/prismaProvider"));
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const createRatingIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const isRatingExist = yield prismaProvider_1.default.rating.findFirst({
+    const isRatingExist = yield prisma_1.default.rating.findFirst({
         where: {
             userId: payload.userId,
             postId: payload.postId,
@@ -26,13 +26,13 @@ const createRatingIntoDB = (payload) => __awaiter(void 0, void 0, void 0, functi
     if (isRatingExist) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "You already rated this post");
     }
-    const result = yield prismaProvider_1.default.rating.create({
+    const result = yield prisma_1.default.rating.create({
         data: payload,
     });
     return result;
 });
 const getAllRating = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.rating.findMany({
+    const result = yield prisma_1.default.rating.findMany({
         include: {
             post: {
                 select: {
@@ -59,7 +59,7 @@ const getAllRating = () => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const getSingleRating = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const getSingleRatingresult = yield prismaProvider_1.default.rating.findUniqueOrThrow({
+    const getSingleRatingresult = yield prisma_1.default.rating.findUniqueOrThrow({
         where: { id },
     });
     return getSingleRatingresult;
@@ -70,7 +70,7 @@ const getMyRating = (user) => __awaiter(void 0, void 0, void 0, function* () {
         throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, 'Unauthorized user');
     }
     ;
-    const existingUser = yield prismaProvider_1.default.user.findUnique({
+    const existingUser = yield prisma_1.default.user.findUnique({
         where: {
             email: user === null || user === void 0 ? void 0 : user.email
         },
@@ -78,7 +78,7 @@ const getMyRating = (user) => __awaiter(void 0, void 0, void 0, function* () {
             id: true,
         }
     });
-    const result = yield prismaProvider_1.default.rating.findMany({
+    const result = yield prisma_1.default.rating.findMany({
         where: {
             userId: existingUser === null || existingUser === void 0 ? void 0 : existingUser.id
         }

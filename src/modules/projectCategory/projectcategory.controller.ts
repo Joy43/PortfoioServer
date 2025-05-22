@@ -4,7 +4,7 @@ import sendResponse from "../../utils/sendResponse";
 
 import pick from "../../utils/pick";
 import { categoryServices } from "./projectcategory.service";
-import prisma from "../../utils/prismaProvider";
+import prisma from "../../utils/prisma";
 
 const createCategory = catchAsync(async (req, res) => {
   const result = await categoryServices.createProjectCategoty(req.body);

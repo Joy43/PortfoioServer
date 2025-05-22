@@ -2,8 +2,9 @@ import express from "express";
 import { commentController } from "./comment.controller";
 import validateRequest from "../../utils/validateRequest";
 import { commentValidation } from "./comment.validation";
-import auth from "../../middlewares/auth";
-import { UserRole } from "../../../generated/prisma";
+import { UserRole } from "@prisma/client";
+import auth from "../../middleware/auth";
+
 
 
 const router = express.Router();

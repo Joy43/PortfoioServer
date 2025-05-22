@@ -14,16 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authServices = void 0;
 const http_status_1 = __importDefault(require("http-status"));
-const prisma_1 = require("../../../generated/prisma");
-const prismaProvider_1 = __importDefault(require("../../utils/prismaProvider"));
 const bcryptHelper_1 = require("../../utils/bcryptHelper");
 const jwtHelper_1 = require("../../utils/jwtHelper");
 const config_1 = __importDefault(require("../../config"));
 const sendEmail_1 = __importDefault(require("../../utils/sendEmail"));
 const AppError_1 = __importDefault(require("../../errors/AppError"));
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 // ---------- 
 const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const isUserExist = yield prismaProvider_1.default.user.findUnique({
+    const isUserExist = yield prisma_1.default.user.findUnique({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },
     });
     if (!isUserExist) {
@@ -48,7 +47,7 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // ------------------------ register user------------
 const registerNewUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const isUserExist = yield prismaProvider_1.default.user.findUnique({
+    const isUserExist = yield prisma_1.default.user.findUnique({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },
     });
     if (isUserExist) {
@@ -56,7 +55,7 @@ const registerNewUser = (payload) => __awaiter(void 0, void 0, void 0, function*
     }
     const hashedPassword = yield bcryptHelper_1.bcryptHelper.hashPassword(payload === null || payload === void 0 ? void 0 : payload.password);
     payload.password = hashedPassword;
-    const result = yield prismaProvider_1.default.user.create({
+    const result = yield prisma_1.default.user.create({
         data: payload,
     });
     const jwtData = {
@@ -74,7 +73,7 @@ const registerNewUser = (payload) => __awaiter(void 0, void 0, void 0, function*
 });
 // -----------
 const changePasswordWithOldPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const isUserExist = yield prismaProvider_1.default.user.findUnique({
+    const isUserExist = yield prisma_1.default.user.findUnique({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },
     });
     if (!isUserExist) {
@@ -85,14 +84,14 @@ const changePasswordWithOldPassword = (payload) => __awaiter(void 0, void 0, voi
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Old password does not match");
     }
     const hashedPassword = yield bcryptHelper_1.bcryptHelper.hashPassword(payload === null || payload === void 0 ? void 0 : payload.newPassword);
-    const result = yield prismaProvider_1.default.user.update({
+    const result = yield prisma_1.default.user.update({
         where: { email: isUserExist === null || isUserExist === void 0 ? void 0 : isUserExist.email },
         data: { password: hashedPassword },
     });
     return result;
 });
 const generateForgetPasswordLink = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const isUserExist = yield prismaProvider_1.default.user.findUnique({
+    const isUserExist = yield prisma_1.default.user.findUnique({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },
     });
     if (!isUserExist) {
@@ -111,7 +110,7 @@ const generateForgetPasswordLink = (payload) => __awaiter(void 0, void 0, void 0
     return null;
 });
 const resetPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const isUserExist = yield prismaProvider_1.default.user.findUnique({
+    const isUserExist = yield prisma_1.default.user.findUnique({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },
     });
     if (!isUserExist) {
@@ -122,14 +121,14 @@ const resetPassword = (payload) => __awaiter(void 0, void 0, void 0, function* (
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Invalid token");
     }
     const hashedPassword = yield bcryptHelper_1.bcryptHelper.hashPassword(payload === null || payload === void 0 ? void 0 : payload.newPassword);
-    const result = yield prismaProvider_1.default.user.update({
+    const result = yield prisma_1.default.user.update({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },
         data: { password: hashedPassword },
     });
     return result;
 });
 const getMe = (jwtData) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.user.findUnique({
+    const result = yield prisma_1.default.user.findUnique({
         where: { email: jwtData === null || jwtData === void 0 ? void 0 : jwtData.email },
     });
     return result;
@@ -142,13 +141,13 @@ const generateAccessToken = (token) => __awaiter(void 0, void 0, void 0, functio
     catch (error) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Invalid token");
     }
-    const isUserExist = yield prismaProvider_1.default.user.findUnique({
+    const isUserExist = yield prisma_1.default.user.findUnique({
         where: { email: decoded === null || decoded === void 0 ? void 0 : decoded.email },
     });
     if (!isUserExist) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "User does not exist");
     }
-    if ((isUserExist === null || isUserExist === void 0 ? void 0 : isUserExist.status) !== prisma_1.UserStatus.ACTIVE) {
+    if ((isUserExist === null || isUserExist === void 0 ? void 0 : isUserExist.status) !== UserStatus.ACTIVE) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "User is not active");
     }
     const jwtData = {

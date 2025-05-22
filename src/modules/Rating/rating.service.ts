@@ -1,9 +1,10 @@
-import status from "http-status";
-import { Rating } from "../../../generated/prisma";
+
+import { Rating } from "@prisma/client";
 import AppError from "../../errors/AppError";
 
-import prisma from '../../utils/prismaProvider';
-import { IAuthUser } from "../../interface/usercommon";
+import prisma from '../../utils/prisma';
+import status from "http-status";
+
 
 const createRatingIntoDB = async (payload: Rating) => {
   const isRatingExist = await prisma.rating.findFirst({

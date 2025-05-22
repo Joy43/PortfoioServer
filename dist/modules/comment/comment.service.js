@@ -13,25 +13,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.commentService = void 0;
-const prismaProvider_1 = __importDefault(require("../../utils/prismaProvider"));
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const createComment = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.comment.create({
+    const result = yield prisma_1.default.comment.create({
         data: payload,
     });
     return result;
 });
 const getCommentId = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.comment.findUniqueOrThrow({
+    const result = yield prisma_1.default.comment.findUniqueOrThrow({
         where: { id },
     });
     return result;
 });
 const getAllComment = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.comment.findMany({});
+    const result = yield prisma_1.default.comment.findMany({});
     return result;
 });
 const getAllUsersComment = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.comment.findMany({
+    const result = yield prisma_1.default.comment.findMany({
         where: {
             userId: payload === null || payload === void 0 ? void 0 : payload.id,
         },

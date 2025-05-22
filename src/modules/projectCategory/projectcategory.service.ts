@@ -1,5 +1,6 @@
-import {  ProjectCategory } from "../../../generated/prisma";
-import prisma from "../../utils/prismaProvider";
+
+import { ProjectCategory } from "@prisma/client";
+import prisma from "../../utils/prisma";
 
 const createProjectCategoty = async (payload: ProjectCategory) => {
   const isCategoryExist = await prisma.projectCategory.findUnique({

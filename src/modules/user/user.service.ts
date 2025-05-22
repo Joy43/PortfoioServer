@@ -1,6 +1,6 @@
 import { JwtPayload } from "jsonwebtoken";
-import { User, UserStatus } from "../../../generated/prisma";
-import prisma from "../../utils/prismaProvider";
+import prisma from "../../utils/prisma";
+import { User, UserStatus } from "@prisma/client";
 
 
 const getAllUser = async (paginateQuery: Record<string, unknown>) => {

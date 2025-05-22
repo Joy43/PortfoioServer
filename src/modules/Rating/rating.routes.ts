@@ -1,7 +1,8 @@
 import express from "express";
 import { ratingController } from "./rating.controller";
-import auth from "../../middlewares/auth";
-import { UserRole } from "../../../generated/prisma";
+import auth from "../../middleware/auth";
+import { UserRole } from "@prisma/client";
+
 
 const router = express.Router();
 

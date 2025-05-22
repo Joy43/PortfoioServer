@@ -24,13 +24,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postServices = void 0;
-const prismaProvider_1 = __importDefault(require("../../utils/prismaProvider"));
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const AppError_1 = __importDefault(require("../../errors/AppError"));
 const http_status_1 = __importDefault(require("http-status"));
 // -------------create post--------------
 const createPost = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Upload", { payload });
-    const result = yield prismaProvider_1.default.post.create({
+    const result = yield prisma_1.default.post.create({
         data: {
             title: payload.title,
             location: payload.location,
@@ -48,7 +48,7 @@ const createPost = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const createMany = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.post.createMany({
+    const result = yield prisma_1.default.post.createMany({
         data: payload,
     });
     return result;
@@ -95,7 +95,7 @@ const getAllPost = (query, paginateQuery) => __awaiter(void 0, void 0, void 0, f
     }
     const whereCondition = queryCondition.length > 0 ? { AND: queryCondition } : {};
     const skip = (Number(page) - 1) * Number(limit);
-    const result = yield prismaProvider_1.default.post.findMany({
+    const result = yield prisma_1.default.post.findMany({
         where: whereCondition,
         take: Number(limit),
         skip,
@@ -110,7 +110,7 @@ const getAllPost = (query, paginateQuery) => __awaiter(void 0, void 0, void 0, f
             user: true,
         },
     });
-    const total = yield prismaProvider_1.default.post.count({ where: whereCondition });
+    const total = yield prisma_1.default.post.count({ where: whereCondition });
     return {
         data: result,
         meta: {
@@ -125,7 +125,7 @@ const getAllPostByAdmin = (paginateQuery) => __awaiter(void 0, void 0, void 0, f
     const { page = 1, limit = 10 } = paginateQuery;
     const skip = (Number(page) - 1) * Number(limit);
     console.log({ page, limit, skip });
-    const result = yield prismaProvider_1.default.post.findMany({
+    const result = yield prisma_1.default.post.findMany({
         take: Number(limit),
         skip,
         orderBy: {
@@ -142,16 +142,16 @@ const getAllPostByAdmin = (paginateQuery) => __awaiter(void 0, void 0, void 0, f
     return {
         data: result,
         meta: {
-            total: yield prismaProvider_1.default.post.count({}),
+            total: yield prisma_1.default.post.count({}),
             page: Number(page),
             limit: Number(limit),
-            totalPage: Math.ceil((yield prismaProvider_1.default.post.count({})) / Number(limit)),
+            totalPage: Math.ceil((yield prisma_1.default.post.count({})) / Number(limit)),
         },
     };
 });
 // --------get single---------------
 const getSinglePost = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.post.findUnique({
+    const result = yield prisma_1.default.post.findUnique({
         where: {
             id,
         },
@@ -170,7 +170,7 @@ const getSinglePost = (id) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // ----------update post-------------
 const updatePost = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const isPostExist = yield prismaProvider_1.default.post.findUnique({
+    const isPostExist = yield prisma_1.default.post.findUnique({
         where: {
             id,
         },
@@ -178,7 +178,7 @@ const updatePost = (id, payload) => __awaiter(void 0, void 0, void 0, function* 
     if (!isPostExist) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Post not found");
     }
-    const result = yield prismaProvider_1.default.post.update({
+    const result = yield prisma_1.default.post.update({
         where: {
             id,
         },

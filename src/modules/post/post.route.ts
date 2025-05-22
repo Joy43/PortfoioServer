@@ -3,8 +3,9 @@ import { postControllers } from "./post.controller";
 import validateRequest from "../../utils/validateRequest";
 import { postValidation } from "./post.validation";
 
-import { UserRole } from "../../../generated/prisma";
+
 import auth from "../../middleware/auth";
+import { UserRole } from "@prisma/client";
 const route = Router();
 route.post(
   "/",
@@ -19,7 +20,7 @@ route.post(
 // -------------all post-----------
 route.get("/", postControllers.getAllPost);
 // ---------get admin post--------------
-route.get("/admin", auth(UserRole.ADMIN), postControllers.getAllPostByAdmin);
+route.get("/admin", auth(UserRole.ADMIN,UserRole.USER), postControllers.getAllPostByAdmin);
 // ----------------get single post-------------
 route.get("/:postId", postControllers.getSinglePost);
 // --------------admin update post-------------------

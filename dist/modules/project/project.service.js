@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.projectService = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const AppError_1 = __importDefault(require("../../errors/AppError"));
-const prismaProvider_1 = __importDefault(require("../../utils/prismaProvider"));
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const createProject = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.project.create({
+    const result = yield prisma_1.default.project.create({
         data: {
             title: payload.title,
             description: payload.description,
@@ -42,7 +42,7 @@ const getAllproject = (paginateQuery) => __awaiter(void 0, void 0, void 0, funct
     const { page = 1, limit = 10 } = paginateQuery;
     const skip = (Number(page) - 1) * Number(limit);
     console.log({ page, limit, skip });
-    const result = yield prismaProvider_1.default.project.findMany({
+    const result = yield prisma_1.default.project.findMany({
         take: Number(limit),
         skip,
         orderBy: {
@@ -56,10 +56,10 @@ const getAllproject = (paginateQuery) => __awaiter(void 0, void 0, void 0, funct
     return {
         data: result,
         meta: {
-            total: yield prismaProvider_1.default.post.count({}),
+            total: yield prisma_1.default.post.count({}),
             page: Number(page),
             limit: Number(limit),
-            totalPage: Math.ceil((yield prismaProvider_1.default.post.count({})) / Number(limit)),
+            totalPage: Math.ceil((yield prisma_1.default.post.count({})) / Number(limit)),
         },
     };
 });
@@ -68,7 +68,7 @@ const Updateproject = (projectId, payload) => __awaiter(void 0, void 0, void 0, 
     if (Array.isArray(payload.languages)) {
         payload.languages = payload.languages.join(", ");
     }
-    const result = yield prismaProvider_1.default.project.update({
+    const result = yield prisma_1.default.project.update({
         where: { id: projectId },
         data: payload
     });
@@ -76,14 +76,14 @@ const Updateproject = (projectId, payload) => __awaiter(void 0, void 0, void 0, 
 });
 // --------delete bike-----------
 const DeleteProject = (projectId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.project.delete({
+    const result = yield prisma_1.default.project.delete({
         where: { id: projectId }
     });
     return result;
 });
 // ------------single project----------
 const getSingleProject = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.project.findUnique({
+    const result = yield prisma_1.default.project.findUnique({
         where: {
             id,
         },

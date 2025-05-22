@@ -13,15 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.categoryServices = void 0;
-const prismaProvider_1 = __importDefault(require("../../utils/prismaProvider"));
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const createProjectCategoty = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const isCategoryExist = yield prismaProvider_1.default.projectCategory.findUnique({
+    const isCategoryExist = yield prisma_1.default.projectCategory.findUnique({
         where: { name: payload === null || payload === void 0 ? void 0 : payload.name },
     });
     if (isCategoryExist) {
         throw new Error("project Category already exist");
     }
-    const result = yield prismaProvider_1.default.projectCategory.create({
+    const result = yield prisma_1.default.projectCategory.create({
         data: payload,
     });
     return result;
@@ -29,17 +29,17 @@ const createProjectCategoty = (payload) => __awaiter(void 0, void 0, void 0, fun
 const getAllCategory = (paginateQuery) => __awaiter(void 0, void 0, void 0, function* () {
     const { page = 1, limit = 10 } = paginateQuery;
     const skip = (Number(page) - 1) * Number(limit);
-    const result = yield prismaProvider_1.default.projectCategory.findMany({
+    const result = yield prisma_1.default.projectCategory.findMany({
         take: Number(limit),
         skip,
     });
     return {
         data: result,
         meta: {
-            total: yield prismaProvider_1.default.projectCategory.count({}),
+            total: yield prisma_1.default.projectCategory.count({}),
             page: Number(page),
             limit: Number(limit),
-            totalPage: Math.ceil((yield prismaProvider_1.default.projectCategory.count({})) / Number(limit)),
+            totalPage: Math.ceil((yield prisma_1.default.projectCategory.count({})) / Number(limit)),
         },
     };
 });

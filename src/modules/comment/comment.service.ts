@@ -1,6 +1,7 @@
 
-import { Comment } from "../../../generated/prisma";
-import prisma from "../../utils/prismaProvider";
+
+import { Comment } from "@prisma/client";
+import prisma from "../../utils/prisma";
 import { JwtPayload } from "jsonwebtoken";
 const createComment = async (payload: Comment) => {
   const result = await prisma.comment.create({

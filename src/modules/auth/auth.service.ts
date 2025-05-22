@@ -1,14 +1,15 @@
 import status from "http-status";
-import { User, UserStatus } from "../../../generated/prisma";
-
-import prisma from "../../utils/prismaProvider";
 import { bcryptHelper } from "../../utils/bcryptHelper";
 import { jwtHelper } from "../../utils/jwtHelper";
 import config from "../../config";
 import sendEmail from "../../utils/sendEmail";
 import { JwtPayload } from "jsonwebtoken";
 import AppError from "../../errors/AppError";
-// ---------- 
+import prisma from "../../utils/prisma";
+import { User, UserStatus } from '@prisma/client';
+
+
+// ---------- login------------
 const loginUser = async (payload: Partial<User>) => {
   const isUserExist = await prisma.user.findUnique({
     where: { email: payload?.email },

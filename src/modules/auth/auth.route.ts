@@ -3,8 +3,9 @@ import { authControllers } from "./auth.controller";
 import validateRequest from "../../utils/validateRequest";
 import { authValidation } from "./auth.validation";
 
-import { UserRole } from "../../../generated/prisma";
 import auth from "../../middleware/auth";
+import { UserRole } from "@prisma/client";
+
 
 const route = Router();
 

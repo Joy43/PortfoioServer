@@ -1,7 +1,8 @@
 import status from 'http-status';
-import { Project, UserRole } from '../../../generated/prisma/index';
+
 import AppError from '../../errors/AppError';
-import prisma from '../../utils/prismaProvider';
+import prisma from '../../utils/prisma';
+import { Project } from '@prisma/client';
 
 const createProject=async(payload:Project)=>{
     const result = await prisma.project.create({

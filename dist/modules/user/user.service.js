@@ -14,11 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userServices = exports.getuserCredentials = void 0;
 const prisma_1 = require("../../../generated/prisma");
-const prismaProvider_1 = __importDefault(require("../../utils/prismaProvider"));
+const prisma_2 = __importDefault(require("../../utils/prisma"));
 const getAllUser = (paginateQuery) => __awaiter(void 0, void 0, void 0, function* () {
     const { page = 1, limit = 10 } = paginateQuery;
     const skip = (Number(page) - 1) * Number(limit);
-    const result = yield prismaProvider_1.default.user.findMany({
+    const result = yield prisma_2.default.user.findMany({
         take: Number(limit),
         skip,
         include: {
@@ -31,15 +31,15 @@ const getAllUser = (paginateQuery) => __awaiter(void 0, void 0, void 0, function
     return {
         data: result,
         meta: {
-            total: yield prismaProvider_1.default.user.count({}),
+            total: yield prisma_2.default.user.count({}),
             page: Number(page),
             limit: Number(limit),
-            totalPage: Math.ceil((yield prismaProvider_1.default.user.count({})) / Number(limit)),
+            totalPage: Math.ceil((yield prisma_2.default.user.count({})) / Number(limit)),
         },
     };
 });
 const getSingleUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.user.findUnique({
+    const result = yield prisma_2.default.user.findUnique({
         where: {
             id,
         },
@@ -53,7 +53,7 @@ const getSingleUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const updateUser = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.user.update({
+    const result = yield prisma_2.default.user.update({
         where: {
             id,
         },
@@ -68,7 +68,7 @@ const updateUser = (id, payload) => __awaiter(void 0, void 0, void 0, function* 
     return result;
 });
 const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prismaProvider_1.default.user.update({
+    const result = yield prisma_2.default.user.update({
         where: {
             id,
         },
@@ -81,7 +81,7 @@ const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const getuserCredentials = (decoded) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, email } = decoded;
-    const posts = yield prismaProvider_1.default.post.findMany({
+    const posts = yield prisma_2.default.post.findMany({
         where: {
             userId: id,
         },
@@ -93,7 +93,7 @@ const getuserCredentials = (decoded) => __awaiter(void 0, void 0, void 0, functi
             user: true,
         },
     });
-    const comments = yield prismaProvider_1.default.comment.findMany({
+    const comments = yield prisma_2.default.comment.findMany({
         where: {
             userId: id,
         },
@@ -102,7 +102,7 @@ const getuserCredentials = (decoded) => __awaiter(void 0, void 0, void 0, functi
             user: true,
         },
     });
-    const ratings = yield prismaProvider_1.default.rating.findMany({
+    const ratings = yield prisma_2.default.rating.findMany({
         where: {
             userId: id,
         },
@@ -111,7 +111,7 @@ const getuserCredentials = (decoded) => __awaiter(void 0, void 0, void 0, functi
             user: true,
         },
     });
-    const votes = yield prismaProvider_1.default.vote.findMany({
+    const votes = yield prisma_2.default.vote.findMany({
         where: {
             userId: id,
         },
@@ -120,7 +120,7 @@ const getuserCredentials = (decoded) => __awaiter(void 0, void 0, void 0, functi
             user: true,
         },
     });
-    const user = yield prismaProvider_1.default.user.findUnique({
+    const user = yield prisma_2.default.user.findUnique({
         where: {
             id,
         },
