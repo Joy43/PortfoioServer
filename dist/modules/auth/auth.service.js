@@ -21,6 +21,7 @@ const jwtHelper_1 = require("../../utils/jwtHelper");
 const config_1 = __importDefault(require("../../config"));
 const sendEmail_1 = __importDefault(require("../../utils/sendEmail"));
 const AppError_1 = __importDefault(require("../../errors/AppError"));
+// ---------- 
 const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const isUserExist = yield prismaProvider_1.default.user.findUnique({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },
@@ -45,6 +46,7 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
         refreshToken,
     };
 });
+// ------------------------ register user------------
 const registerNewUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const isUserExist = yield prismaProvider_1.default.user.findUnique({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },
@@ -70,6 +72,7 @@ const registerNewUser = (payload) => __awaiter(void 0, void 0, void 0, function*
         refreshToken,
     };
 });
+// -----------
 const changePasswordWithOldPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const isUserExist = yield prismaProvider_1.default.user.findUnique({
         where: { email: payload === null || payload === void 0 ? void 0 : payload.email },

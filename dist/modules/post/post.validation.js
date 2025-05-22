@@ -8,7 +8,6 @@ const postSchema = zod_1.z.object({
         description: zod_1.z.string().min(1, "Description is required"),
         location: zod_1.z.string().min(1, "Location is required"),
         image: zod_1.z.string().url("Image must be a valid URL"),
-        priceRange: zod_1.z.enum(["Low", "Medium", "High"]),
         categoryId: zod_1.z.string({ required_error: "Category ID is required" }), // Category ID is required
         userId: zod_1.z.string({ required_error: "User ID is required" }), // User ID is required
     }),

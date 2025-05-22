@@ -18,6 +18,7 @@ const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const post_service_1 = require("./post.service");
 const pick_1 = __importDefault(require("../../utils/pick"));
+// ----------crete post------------
 const createPost = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield post_service_1.postServices.createPost(req.body);
     (0, sendResponse_1.default)(res, {
@@ -36,19 +37,16 @@ const createMany = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         data: result,
     });
 }));
+// ----------get all post--------------
 const getAllPost = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const token = (_a = req.headers) === null || _a === void 0 ? void 0 : _a.authorization;
     const searchQuery = (0, pick_1.default)(req.query, [
         "searchTerm",
         "category",
         "title",
         "location",
-        "priceRange",
     ]);
     const paginateQuery = (0, pick_1.default)(req.query, ["page", "limit"]);
-    const priceQuery = (0, pick_1.default)(req.query, ["minPrice", "maxPrice"]);
-    const result = yield post_service_1.postServices.getAllPost(searchQuery, paginateQuery, priceQuery, token);
+    const result = yield post_service_1.postServices.getAllPost(searchQuery, paginateQuery);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
@@ -57,25 +55,7 @@ const getAllPost = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         meta: result === null || result === void 0 ? void 0 : result.meta,
     });
 }));
-const getAllPostByUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const paginateQuery = (0, pick_1.default)(req.query, ["page", "limit"]);
-    const result = yield post_service_1.postServices.getAllPostByUser(req.user, paginateQuery);
-    (0, sendResponse_1.default)(res, {
-        statusCode: http_status_1.default.OK,
-        success: true,
-        message: "Post retrived successfully",
-        data: result,
-    });
-}));
-const getHomePageAllPost = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield post_service_1.postServices.getHomePageAllPost();
-    (0, sendResponse_1.default)(res, {
-        statusCode: http_status_1.default.OK,
-        success: true,
-        message: "Post retrived successfully",
-        data: result,
-    });
-}));
+// ---------single post------------------
 const getSinglePost = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { postId } = req.params;
     const result = yield post_service_1.postServices.getSinglePost(postId);
@@ -86,16 +66,8 @@ const getSinglePost = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: result,
     });
 }));
-const updatePostByUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { postId } = req.params;
-    const result = yield post_service_1.postServices.updatePostsByUser(postId, req.body, req.user);
-    (0, sendResponse_1.default)(res, {
-        statusCode: http_status_1.default.OK,
-        success: true,
-        message: "Post retrived successfully",
-        data: result,
-    });
-}));
+// -------------update post by user----------------
+// -----------get all post admin--------------
 const getAllPostByAdmin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const paginateQuery = (0, pick_1.default)(req.query, ["page", "limit"]);
     const result = yield post_service_1.postServices.getAllPostByAdmin(paginateQuery);
@@ -125,7 +97,4 @@ exports.postControllers = {
     getSinglePost,
     updatePost,
     getAllPostByAdmin,
-    getAllPostByUser,
-    updatePostByUser,
-    getHomePageAllPost,
 };
