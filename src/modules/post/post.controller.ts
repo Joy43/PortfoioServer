@@ -4,7 +4,7 @@ import sendResponse from "../../utils/sendResponse";
 import { postServices } from "./post.service";
 import pick from "../../utils/pick";
 import { JwtPayload } from "jsonwebtoken";
-
+// ----------crete post------------
 const createPost = catchAsync(async (req, res) => {
   const result = await postServices.createPost(req.body);
   sendResponse(res, {
@@ -24,23 +24,21 @@ const createMany = catchAsync(async (req, res) => {
   });
 });
 
+// ----------get all post--------------
 const getAllPost = catchAsync(async (req, res) => {
-  const token = req.headers?.authorization!;
 
   const searchQuery = pick(req.query, [
     "searchTerm",
     "category",
     "title",
     "location",
-    "priceRange",
+   
   ]);
   const paginateQuery = pick(req.query, ["page", "limit"]);
-  const priceQuery = pick(req.query, ["minPrice", "maxPrice"]);
   const result = await postServices.getAllPost(
     searchQuery,
     paginateQuery,
-    priceQuery,
-    token
+    
   );
   sendResponse(res, {
     statusCode: status.OK,
@@ -51,28 +49,7 @@ const getAllPost = catchAsync(async (req, res) => {
   });
 });
 
-const getAllPostByUser = catchAsync(async (req, res) => {
-  const paginateQuery = pick(req.query, ["page", "limit"]);
-  const result = await postServices.getAllPostByUser(
-    req.user as JwtPayload,
-    paginateQuery
-  );
-  sendResponse(res, {
-    statusCode: status.OK,
-    success: true,
-    message: "Post retrived successfully",
-    data: result,
-  });
-});
-const getHomePageAllPost = catchAsync(async (req, res) => {
-  const result = await postServices.getHomePageAllPost();
-  sendResponse(res, {
-    statusCode: status.OK,
-    success: true,
-    message: "Post retrived successfully",
-    data: result,
-  });
-});
+// ---------single post------------------
 const getSinglePost = catchAsync(async (req, res) => {
   const { postId } = req.params;
   const result = await postServices.getSinglePost(postId);
@@ -83,21 +60,10 @@ const getSinglePost = catchAsync(async (req, res) => {
     data: result,
   });
 });
-const updatePostByUser = catchAsync(async (req, res) => {
-  const { postId } = req.params;
 
-  const result = await postServices.updatePostsByUser(
-    postId,
-    req.body,
-    req.user as JwtPayload
-  );
-  sendResponse(res, {
-    statusCode: status.OK,
-    success: true,
-    message: "Post retrived successfully",
-    data: result,
-  });
-});
+// -------------update post by user----------------
+
+// -----------get all post admin--------------
 const getAllPostByAdmin = catchAsync(async (req, res) => {
   const paginateQuery = pick(req.query, ["page", "limit"]);
   const result = await postServices.getAllPostByAdmin(paginateQuery);
@@ -129,7 +95,5 @@ export const postControllers = {
   getSinglePost,
   updatePost,
   getAllPostByAdmin,
-  getAllPostByUser,
-  updatePostByUser,
-  getHomePageAllPost,
+ 
 };

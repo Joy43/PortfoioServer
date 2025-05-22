@@ -1,15 +1,27 @@
-import { JwtPayload } from "jsonwebtoken";
+
 import { Post,  Prisma, UserRole } from "../../../generated/prisma";
-import config from "../../config";
-import { jwtHelper } from "../../utils/jwtHelper";
+
 import prisma from "../../utils/prismaProvider";
 import AppError from "../../errors/AppError";
 import status from "http-status";
-
+// -------------create post--------------
 const createPost = async (payload: Post) => {
   console.log("Upload", { payload });
   const result = await prisma.post.create({
-    data: payload,
+data: {
+    title: payload.title,
+    location:payload.location,
+    description: payload.description,
+    language: payload.language,
+    image: payload.image,
+   
+    category: {
+      connect: { id: payload.categoryId }
+    },
+    user: {
+      connect: { id: payload.userId }
+    }
+  }
   });
   return result;
 };
@@ -20,46 +32,22 @@ const createMany = async (payload: Post[]) => {
   });
   return result;
 };
-
+// ---------------all post get-------------
 const getAllPost = async (
   query: Record<string, unknown>,
-  paginateQuery: Record<string, unknown>,
-  priceQuery: Record<string, unknown>,
-  token: string = ""
+  paginateQuery: Record<string, unknown>
 ) => {
-  const queryCondition: Prisma.PostWhereInput[] = [
-    {
-      status: PostStatus.APPROVED,
-    },
-  ];
-  if (token) {
-    const decodedToken = jwtHelper.decodedToken(
-      token,
-      config.jwt_access_secret as string
-    ) as JwtPayload;
-    if (decodedToken?.role === UserRole.PREMIUM) {
-      queryCondition.push({});
-    } else {
-      queryCondition.push({
-        isPremium: false,
-      });
-    }
-  } else {
-    queryCondition.push({
-      isPremium: false,
-    });
-  }
-
   const { searchTerm, ...fieldsValues } = query;
   const { page = 1, limit = 10 } = paginateQuery;
-  const { minPrice = 0, maxPrice = 1000000 } = priceQuery;
+
+  const queryCondition: any[] = [];
+
+  // Search by title, description, or category name
   if (searchTerm) {
     queryCondition.push({
       OR: [
         { title: { contains: searchTerm as string, mode: "insensitive" } },
-        {
-          description: { contains: searchTerm as string, mode: "insensitive" },
-        },
+        { description: { contains: searchTerm as string, mode: "insensitive" } },
         {
           category: {
             name: { contains: searchTerm as string, mode: "insensitive" },
@@ -68,12 +56,14 @@ const getAllPost = async (
       ],
     });
   }
+
+  // Filter by other field values
   if (Object.keys(fieldsValues).length > 0) {
     queryCondition.push({
       AND: Object.keys(fieldsValues).map((key) => {
         if (key === "category") {
           return {
-            [key]: {
+            category: {
               name: {
                 equals: fieldsValues[key] as string,
               },
@@ -89,17 +79,10 @@ const getAllPost = async (
     });
   }
 
-  queryCondition.push({
-    price: {
-      gte: Number(minPrice),
-      lte: Number(maxPrice),
-    },
-  });
+  const whereCondition = queryCondition.length > 0 ? { AND: queryCondition } : {};
 
   const skip = (Number(page) - 1) * Number(limit);
-  const whereCondition = { AND: queryCondition };
-  console.dir(queryCondition, { depth: null });
-  
+
   const result = await prisma.post.findMany({
     where: whereCondition,
     take: Number(limit),
@@ -115,16 +98,20 @@ const getAllPost = async (
       user: true,
     },
   });
+
+  const total = await prisma.post.count({ where: whereCondition });
+
   return {
     data: result,
     meta: {
-      total: await prisma.post.count({ where: whereCondition }),
+      total,
       page: Number(page),
       limit: Number(limit),
     },
   };
 };
 
+// ------------admin --------------
 const getAllPostByAdmin = async (paginateQuery: Record<string, unknown>) => {
   const { page = 1, limit = 10 } = paginateQuery;
   const skip = (Number(page) - 1) * Number(limit);
@@ -153,6 +140,7 @@ const getAllPostByAdmin = async (paginateQuery: Record<string, unknown>) => {
     },
   };
 };
+// --------get single---------------
 const getSinglePost = async (id: string) => {
   const result = await prisma.post.findUnique({
     where: {
@@ -172,71 +160,10 @@ const getSinglePost = async (id: string) => {
   }
   return result;
 };
-const getAllPostByUser = async (
-  payload: JwtPayload,
-  paginateQuery: Record<string, unknown>
-) => {
-  const { page = 1, limit = 10 } = paginateQuery;
-  const skip = (Number(page) - 1) * Number(limit);
-  const result = await prisma.post.findMany({
-    where: {
-      userId: payload?.id,
-    },
-    take: Number(limit),
-    skip,
-    orderBy: {
-      createdAt: "desc",
-    },
-    include: {
-      category: true,
-      user: true,
-      ratings: true,
-      votes: true,
-      comments: true,
-    },
-  });
-  return {
-    data: result,
-    meta: {
-      total: await prisma.post.count({
-        where: {
-          userId: payload?.id,
-        },
-      }),
-      page: Number(page),
-      limit: Number(limit),
-      totalPage: Math.ceil(
-        (await prisma.post.count({
-          where: {
-            userId: payload?.id,
-          },
-        })) / Number(limit)
-      ),
-    },
-  };
-};
-const getHomePageAllPost = async () => {
-  console.log("getHomePageAllPost");
-  const result = await prisma.post.findMany({
-    where: {
-      isPremium: false,
-      status: PostStatus.APPROVED,
-    },
-    include: {
-      category: {
-        include: {
-          posts: true,
-        },
-      },
-      ratings: true,
-      votes: true,
-      comments: true,
-      user: true,
-    },
-  });
-  return result;
-};
 
+
+
+// ----------update post-------------
 const updatePost = async (id: string, payload: Partial<Post>) => {
   const isPostExist = await prisma.post.findUnique({
     where: {
@@ -263,44 +190,8 @@ const updatePost = async (id: string, payload: Partial<Post>) => {
   return result;
 };
 
-const updatePostsByUser = async (
-  id: string,
-  payload: Partial<Post>,
-  user: JwtPayload
-) => {
-  if (payload?.status || payload?.isPremium) {
-    throw new AppError(status.BAD_REQUEST, "You can't update status");
-  }
-  const isPostExist = await prisma.post.findUnique({
-    where: {
-      id,
-      userId: user?.id,
-    },
-    include: {
-      category: true,
-      ratings: true,
-      votes: true,
-      comments: true,
-      user: true,
-    },
-  });
-  if (!isPostExist) {
-    throw new AppError(status.NOT_FOUND, "Post not found");
-  }
-  const result = await prisma.post.update({
-    where: {
-      id,
-    },
-    data: payload,
-    include: {
-      category: true,
-      ratings: true,
-      votes: true,
-      comments: true,
-    },
-  });
-  return result;
-};
+// --------------update-----------
+
 
 export const postServices = {
   createPost,
@@ -309,7 +200,4 @@ export const postServices = {
   getSinglePost,
   updatePost,
   getAllPostByAdmin,
-  getAllPostByUser,
-  updatePostsByUser,
-  getHomePageAllPost,
-};
+}

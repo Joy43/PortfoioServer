@@ -50,26 +50,17 @@ model User {
   updatedAt    DateTime   @updatedAt
 }
 
-model Category {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  image     String
-  posts     Post[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model Post {
-  id          String    @id @default(uuid())
+  id          String          @id @default(uuid())
   title       String
   description String
   location    String
   image       String
   language    String?
   categoryId  String
-  category    Category  @relation(fields: [categoryId], references: [id])
+  category    ProjectCategory @relation(fields: [categoryId], references: [id])
   userId      String
-  user        User      @relation(fields: [userId], references: [id])
+  user        User            @relation(fields: [userId], references: [id])
   comments    Comment[]
   ratings     Rating[]
   votes       Vote[]
@@ -121,6 +112,7 @@ model ProjectCategory {
   name      String    @unique
   image     String
   project   Project[]
+  post      Post[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }

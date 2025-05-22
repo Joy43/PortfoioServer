@@ -1,8 +1,8 @@
-import { Category, ProjectCategory } from "../../../generated/prisma";
+import {  ProjectCategory } from "../../../generated/prisma";
 import prisma from "../../utils/prismaProvider";
 
 const createProjectCategoty = async (payload: ProjectCategory) => {
-  const isCategoryExist = await prisma.category.findUnique({
+  const isCategoryExist = await prisma.projectCategory.findUnique({
     where: { name: payload?.name },
   });
   if (isCategoryExist) {
@@ -24,7 +24,7 @@ const getAllCategory = async (paginateQuery: Record<string, unknown>) => {
   return {
     data: result,
     meta: {
-      total: await prisma.category.count({}),
+      total: await prisma.projectCategory.count({}),
       page: Number(page),
       limit: Number(limit),
       totalPage: Math.ceil((await prisma.projectCategory.count({})) / Number(limit)),

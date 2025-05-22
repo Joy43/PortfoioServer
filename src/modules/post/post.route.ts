@@ -2,8 +2,9 @@ import { Router } from "express";
 import { postControllers } from "./post.controller";
 import validateRequest from "../../utils/validateRequest";
 import { postValidation } from "./post.validation";
-import auth from "../../middlewares/auth";
+
 import { UserRole } from "../../../generated/prisma";
+import auth from "../../middleware/auth";
 const route = Router();
 route.post(
   "/",
@@ -15,29 +16,15 @@ route.post(
   validateRequest(postValidation.manyPostSchema),
   postControllers.createMany
 );
+// -------------all post-----------
 route.get("/", postControllers.getAllPost);
-route.get("/all", postControllers.getHomePageAllPost);
-route.get(
-  "/user",
-  auth(UserRole.USER, UserRole.PREMIUM),
-  postControllers.getAllPostByUser
-);
-route.patch(
-  "/user/:postId",
-  auth(UserRole.USER, UserRole.PREMIUM),
-  postControllers.updatePostByUser
-);
-route.get(
-  "/user",
-  auth(UserRole.USER, UserRole.PREMIUM),
-  postControllers.getAllPostByUser
-);
+// ---------get admin post--------------
 route.get("/admin", auth(UserRole.ADMIN), postControllers.getAllPostByAdmin);
+// ----------------get single post-------------
 route.get("/:postId", postControllers.getSinglePost);
-
-route.patch(
-  "/:postId/update-status",
-  auth(UserRole.ADMIN),
+// --------------admin update post-------------------
+route.put(
+  "/:postId",
   postControllers.updatePost
 );
 

@@ -44,9 +44,9 @@ const getAllProject = catchAsync(async (req, res) => {
 
 const UpdateProject=async(req:Request,res:Response)=>{
     const {projectId}=req.params;
-    const updateproject=await projectService.Updateproject(projectId,req.body);
+    const result=await projectService.Updateproject(projectId,req.body);
     
-    if(!updateproject){
+    if(!result){
         return sendResponse(res,{
             success: false,
             statusCode: status.NOT_FOUND,
@@ -60,7 +60,7 @@ const UpdateProject=async(req:Request,res:Response)=>{
                 success: true,
                 statusCode: status.OK,
                 message: 'update project  successfully',
-                data: updateproject
+                data: result
               });
 
     
@@ -87,9 +87,10 @@ const DeleteProject=async(req:Request,res:Response)=>{
                 data: result
               });
 };
+// --------------get single project------------
 const getSingleProject = catchAsync(async (req, res) => {
-  const { projectId } = req.params;
-  const result = await projectService.getSingleProject(projectId);
+  const { id } = req.params;
+  const result = await projectService.getSingleProject(id);
   sendResponse(res, {
     statusCode: status.OK,
     success: true,

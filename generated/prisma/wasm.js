@@ -133,14 +133,6 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.CategoryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  image: 'image',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -238,7 +230,6 @@ exports.VoteStatus = exports.$Enums.VoteStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Category: 'Category',
   Post: 'Post',
   Comment: 'Comment',
   Rating: 'Rating',

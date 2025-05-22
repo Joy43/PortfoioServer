@@ -54,7 +54,9 @@ const getAllproject = async (paginateQuery: Record<string, unknown>) => {
 };
   // ----------update --------------
   const Updateproject=async(projectId:string,payload:Partial<Project>)=>{
-
+ if (Array.isArray(payload.languages)) {
+    payload.languages = payload.languages.join(", ");
+  }
     const result=await prisma.project.update({
       where: { id: projectId },
         data: payload
@@ -71,13 +73,14 @@ const getAllproject = async (paginateQuery: Record<string, unknown>) => {
     return result;
   
   };
-
+// ------------single project----------
   const getSingleProject = async (id: string) => {
   const result = await prisma.project.findUnique({
     where: {
       id,
     
     },
+    
     include: {
       category: true,
       user: true,
