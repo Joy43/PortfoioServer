@@ -10,17 +10,19 @@ const globalErrorHandler_1 = __importDefault(require("./middleware/globalErrorHa
 const notFound_1 = __importDefault(require("./middleware/notFound"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
     origin: [
+        "https://serverportfolio-eta.vercel.app",
         "http://localhost:3000",
-        "http://localhost:5173"
+        "http://localhost:5173",
     ],
     credentials: true,
 }));
 app.get("/", (req, res) => {
     res.status(200).json({
         success: true,
-        message: "Server is up and running",
+        message: "portfiolio Server is up and running now",
     });
 });
 app.use("/api", routes_1.default);

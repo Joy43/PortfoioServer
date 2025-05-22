@@ -1,27 +1,29 @@
 import express from "express";
 import cors from "cors";
-
 import route from "./routes";
 import globalErrorHandler from "./middleware/globalErrorHandler";
 import notFound from "./middleware/notFound";
-
 const app = express();
-
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
+      "https://serverportfolio-eta.vercel.app",
       "http://localhost:3000",
-      "http://localhost:5173"
+      "http://localhost:5173",
+      
     ],
-     credentials: true,
+    credentials: true,
   })
 );
+
+
 
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
-    message: "Server is up and running",
+    message: "portfiolio Server is up and running now",
   });
 });
 app.use("/api", route);
